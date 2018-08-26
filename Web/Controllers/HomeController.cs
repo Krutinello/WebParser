@@ -1,6 +1,5 @@
 ﻿using Bll.Interfaces;
 using System.Net;
-using System.Net.Http;
 using System.Web.Mvc;
 
 namespace Web.Controllers
@@ -13,19 +12,15 @@ namespace Web.Controllers
             _parserService = service;
         }
 
-        public ActionResult Index()
-        {
-            return View();
-        }
+        public ActionResult Index() =>View();
+
         public ActionResult Parser()
         {
             _parserService.Parse();
-            return View(_parserService.GetAllProducts());
+            return Redirect("/Home/Products");
         }
-        public ActionResult Products()
-        {
-            return View(_parserService.GetAllProducts());
-        }
+        public ActionResult Products() => View(_parserService.GetAllProducts());
+
         public ActionResult Product(int? id)
         {
             if (!id.HasValue)

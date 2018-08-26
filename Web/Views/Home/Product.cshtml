@@ -13,7 +13,7 @@
         <br />
         @foreach (var price in Model.Prices)
         {
-            <p>@price.Date - @price.Price</p>
+            <p>@price.Date.ToString("dd.MM.yyyy") - @price.Price</p>
             <br />
         }
         <p>@Model.Description</p>

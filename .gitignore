@@ -1,6 +1,7 @@
 # desc
 .vs/
 packages/
+Web/App_Data/
 Web/obj/
 Web/bin/
 Web/Content/Images
