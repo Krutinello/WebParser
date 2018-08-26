@@ -1,0 +1,21 @@
+﻿@model Bll.DTO.ProductDTO
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Product</h2>
+<div class="row">
+    <div class="col-lg-3">
+        <a href="~/Home/Product/@Model.Id"><label>@Model.Name</label></a>
+        <br />
+        <img class="img-responsive" src="@Model.ImagePath" />
+        <br />
+        @foreach (var price in Model.Prices)
+        {
+            <p>@price.Date - @price.Price</p>
+            <br />
+        }
+        <p>@Model.Description</p>
+    </div>
+</div>

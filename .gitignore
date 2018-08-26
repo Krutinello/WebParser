@@ -1,0 +1,12 @@
+# desc
+.vs/
+packages/
+Web/obj/
+Web/bin/
+Web/Content/Images
+Bll/bin/
+Bll/obj/
+Dal/bin/
+Dal/obj/
+Web.Tests/obj/
+Web.Tests/bin/
