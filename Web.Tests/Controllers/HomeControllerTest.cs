@@ -1,54 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web.Mvc;
+﻿using Bll.DTO;
+using Bll.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Web;
+using Moq;
+using System.Collections.Generic;
+using System.Web.Mvc;
 using Web.Controllers;
 
 namespace Web.Tests.Controllers
 {
-    //[TestClass]
-    //public class HomeControllerTest
-    //{
-    //    [TestMethod]
-    //    public void Index()
-    //    {
-    //        // Arrange
-    //        HomeController controller = new HomeController();
+    [TestClass]
+    public class HomeControllerTest
+    {
+        //private static Mock<IParserService> _parserService;
 
-    //        // Act
-    //        ViewResult result = controller.Index() as ViewResult;
+        //[ClassInitialize]
+        //private static void ClassInitialize(TestContext db)
+        //{
 
-    //        // Assert
-    //        Assert.IsNotNull(result);
-    //    }
+        //    //_parserService = new Mock<IParserService>();
+        //    //_parserService.Setup(a => a.GetAllProducts()).Returns(new List<ProductDTO>());
+        //}
 
-    //    [TestMethod]
-    //    public void About()
-    //    {
-    //        // Arrange
-    //        HomeController controller = new HomeController();
+        [TestMethod]
+        public void ProductsViewModelNotNull()
+        {
+            // Arrange
+            var mock = new Mock<IParserService>();
+            mock.Setup(a => a.GetAllProducts()).Returns(new List<ProductDTO>());
+            HomeController controller = new HomeController(mock.Object);
 
-    //        // Act
-    //        ViewResult result = controller.About() as ViewResult;
+            // Act
+            ViewResult result = controller.Products() as ViewResult;
 
-    //        // Assert
-    //        Assert.AreEqual("Your application description page.", result.ViewBag.Message);
-    //    }
+            // Assert
+            Assert.IsNotNull(result.Model);
+        }
 
-    //    [TestMethod]
-    //    public void Contact()
-    //    {
-    //        // Arrange
-    //        HomeController controller = new HomeController();
+        //[TestMethod]
+        //public void ParseProducts()
+        //{
+        //    // Arrange
+        //    var mock = new Mock<IParserService>();
+        //    mock.Setup(a => a.Parse()).Returns(new List<ProductDTO>());
+        //    HomeController controller = new HomeController(mock.Object);
 
-    //        // Act
-    //        ViewResult result = controller.Contact() as ViewResult;
+        //    // Act
+        //    ViewResult result = controller.Products() as ViewResult;
 
-    //        // Assert
-    //        Assert.IsNotNull(result);
-    //    }
-    //}
+        //    // Assert
+        //    Assert.IsNotNull(result.Model);
+        //}
+    }
 }

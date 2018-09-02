@@ -12,13 +12,14 @@ namespace Web.Controllers
             _parserService = service;
         }
 
-        public ActionResult Index() =>View();
+        public ActionResult Index() => View();
 
         public ActionResult Parser()
         {
             _parserService.Parse();
             return Redirect("/Home/Products");
         }
+
         public ActionResult Products() => View(_parserService.GetAllProducts());
 
         public ActionResult Product(int? id)

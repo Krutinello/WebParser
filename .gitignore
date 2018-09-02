@@ -11,3 +11,5 @@ Dal/bin/
 Dal/obj/
 Web.Tests/obj/
 Web.Tests/bin/
+Bll.Tests/obj/
+Bll.Tests/bin/
