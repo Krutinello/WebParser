@@ -101,25 +101,33 @@ namespace Bll.Service
                 throw new ValidationException("Bad news", "");
         }
 
-        private string SaveImage(string url)
+        public string SaveImage(string url)
         {
-            WebRequest req = WebRequest.Create(url);
-            WebResponse response = req.GetResponse();
-            Stream stream = response.GetResponseStream();
+            try
+            {
+                WebRequest req = WebRequest.Create(url);
+                WebResponse response = req.GetResponse();
+                Stream stream = response.GetResponseStream();
 
 
-            Image img = Image.FromStream(stream);
-            stream.Flush();
-            stream.Close();
+                Image img = Image.FromStream(stream);
+                stream.Flush();
+                stream.Close();
 
-            string fileName = Guid.NewGuid().ToString() + ".jpg";
-            string root = HttpContext.Current.Server.MapPath("~/Content/Images/" + fileName);
+                string fileName = Guid.NewGuid().ToString() + ".jpg";
+                string root = HttpContext.Current.Server.MapPath("~/Content/Images/" + fileName);
 
-            img.Save(root, ImageFormat.Jpeg);
+                img.Save(root, ImageFormat.Jpeg);
 
-            string path = "/Content/Images/" + fileName;
+                string path = "/Content/Images/" + fileName;
 
-            return path;
+                return path;
+            }
+            catch(Exception ex)
+            {
+                throw new ValidationException(ex.Message, "");
+            }
+
         }
 
         public void Dispose()

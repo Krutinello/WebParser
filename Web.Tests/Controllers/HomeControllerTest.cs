@@ -11,23 +11,20 @@ namespace Web.Tests.Controllers
     [TestClass]
     public class HomeControllerTest
     {
-        //private static Mock<IParserService> _parserService;
+        Mock<IParserService> _parserService;
 
-        //[ClassInitialize]
-        //private static void ClassInitialize(TestContext db)
-        //{
-
-        //    //_parserService = new Mock<IParserService>();
-        //    //_parserService.Setup(a => a.GetAllProducts()).Returns(new List<ProductDTO>());
-        //}
+        [TestInitialize]
+        public  void TestInitialize()
+        {
+            _parserService = new Mock<IParserService>();
+            _parserService.Setup(a => a.GetAllProducts()).Returns(new List<ProductDTO>());
+        }
 
         [TestMethod]
         public void ProductsViewModelNotNull()
         {
             // Arrange
-            var mock = new Mock<IParserService>();
-            mock.Setup(a => a.GetAllProducts()).Returns(new List<ProductDTO>());
-            HomeController controller = new HomeController(mock.Object);
+            HomeController controller = new HomeController(_parserService.Object);
 
             // Act
             ViewResult result = controller.Products() as ViewResult;
