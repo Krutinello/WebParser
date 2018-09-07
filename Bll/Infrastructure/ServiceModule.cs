@@ -16,7 +16,7 @@ namespace Bll.Infrastructure
         public override void Load()
         {
             Bind<IUnitOfWork>().To<EFUnitOfWork>().WithConstructorArgument(connectionString);
-            Bind<IParser>().To<PcShopParser>();
+            //Bind<IParser>().To<PcShopParser>();
             Bind<IMapper>().To<Mapper>();
         }
     }

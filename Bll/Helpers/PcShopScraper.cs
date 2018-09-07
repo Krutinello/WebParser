@@ -1,4 +1,5 @@
-﻿using Bll.DTO;
+﻿using Bll.Chain;
+using Bll.DTO;
 using Bll.Interfaces;
 using HtmlAgilityPack;
 using System;
@@ -6,11 +7,10 @@ using System.Collections.Generic;
 
 namespace Bll.Helpers
 {
-    public class PcShopParser : IParser
-    {
-        public List<ProductDTO> ParsePcShop()
+    public class PcShopScraper : Interfaces.IScraper
+    {      
+        public List<ProductDTO> Scrap(string url)
         {
-            string url = "https://pcshop.ua/noutbuki-i-aksessuari/noutbuki";
             HtmlWeb webDoc = new HtmlWeb();
             HtmlDocument doc = webDoc.Load(url);
 
@@ -31,13 +31,15 @@ namespace Bll.Helpers
                 comp.ImagePath = imgNode.Attributes["src"].Value;
                 comp.Description = descNode.InnerText;
 
-                ProductPriceDTO price = new ProductPriceDTO(){
+                ProductPriceDTO price = new ProductPriceDTO()
+                {
                     Date = DateTime.Now,
-                    Price = priceNode.InnerText};
+                    Price = priceNode.InnerText
+                };
                 comp.Prices.Add(price);
                 comps.Add(comp);
             }
             return comps;
-        }
+        }        
     }
 }

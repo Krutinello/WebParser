@@ -15,7 +15,7 @@ namespace Bll.Tests
     [TestClass]
     public class ParserServiceTests
     {
-        Mock<IParser> _parser;
+        Mock<IScraper> _parser;
         Mock<IMapper> _mapper;
         Mock<IUnitOfWork> _uow;
 
@@ -72,7 +72,7 @@ namespace Bll.Tests
 
         [TestMethod]
         public void SaveImage_ImagePath(string url) {
-            _parser = new Mock<IParser>();
+            _parser = new Mock<IScraper>();
 
             _mapper = new Mock<IMapper>();
 
@@ -88,7 +88,7 @@ namespace Bll.Tests
 
         [TestMethod]
         public void GetAllProducts_listProductsDto(){
-            _parser = new Mock<IParser>();
+            _parser = new Mock<IScraper>();
             _parser.Setup(a => a.ParsePcShop()).Returns(new List<ProductDTO>());
 
             _mapper = new Mock<IMapper>();

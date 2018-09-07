@@ -11,19 +11,18 @@ using System.Net;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Web;
+using Bll.Helpers;
 
 namespace Bll.Service
 {
     public class ParserService : IParserService
     {
         IUnitOfWork _uow { get; set; }
-        IParser _parser { get; set; }
         IMapper _mapper { get; set; }
 
-        public ParserService(IUnitOfWork uow,IParser parser,IMapper mapper)
+        public ParserService(IUnitOfWork uow, IMapper mapper)
         {
             _uow = uow;
-            _parser = parser;
             _mapper = mapper;
         }
 
@@ -53,11 +52,22 @@ namespace Bll.Service
             return productDto;
         }
 
-        public void Parse()
-        {
-            List<ProductDTO> productsDto = _parser.ParsePcShop();
-           
-            if(productsDto != null && productsDto.Any())
+        public void Parse(string url)
+        {          
+            List<ProductDTO> productsDto = null;
+
+            ScrapWorker worker = new ScrapWorker();
+
+            try
+            {
+                productsDto = worker.Scrap(url);
+            }
+            catch(Exception ex)
+            {
+                throw new ValidationException(ex.Message, "");
+            }
+
+            if (productsDto != null && productsDto.Any())
             {
                 List<Product> products = _uow.Products.GetAll().ToList();
 
@@ -101,7 +111,7 @@ namespace Bll.Service
                 throw new ValidationException("Bad news", "");
         }
 
-        public string SaveImage(string url)
+        private string SaveImage(string url)
         {
             try
             {
@@ -127,7 +137,6 @@ namespace Bll.Service
             {
                 throw new ValidationException(ex.Message, "");
             }
-
         }
 
         public void Dispose()

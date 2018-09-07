@@ -5,7 +5,7 @@ namespace Bll.Interfaces
 {
     public interface IParserService
     {
-        void Parse();
+        void Parse(string url);
         List<ProductDTO> GetAllProducts();
         ProductDTO GetProduct(int? id);
         void Dispose();

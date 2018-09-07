@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Bll.Interfaces
 {
-    public interface IParser
+    public interface IScraper
     {
-        List<ProductDTO> ParsePcShop();
+        List<ProductDTO> Scrap(string url);
     }
 }

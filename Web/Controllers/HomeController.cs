@@ -14,9 +14,11 @@ namespace Web.Controllers
 
         public ActionResult Index() => View();
 
-        public ActionResult Parser()
+        public ActionResult Parser(string url)
         {
-            _parserService.Parse();
+            url = "https://pcshop.ua/noutbuki-i-aksessuari/noutbuki";
+
+            _parserService.Parse(url);
             return Redirect("/Home/Products");
         }
 
